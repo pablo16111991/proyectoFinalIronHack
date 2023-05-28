@@ -191,4 +191,14 @@ public class CommentControllerTest {
         assertEquals(1, participanteRepository.findById(1l).get().getComments().size());
     }
 
+    @Test
+    public void shoudlDeleteComment () throws Exception {
+
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/delete-comment/1"))
+                .andExpect(status().isOk()).andReturn();
+        assertTrue(commentRepository.findById(1l).isEmpty());
+
+    }
+
 }
