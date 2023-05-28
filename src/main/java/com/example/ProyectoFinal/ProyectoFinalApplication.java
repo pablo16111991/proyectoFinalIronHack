@@ -68,7 +68,7 @@ public class ProyectoFinalApplication implements CommandLineRunner {
 		tallerRepository.save(taller1);
 
 
-		Comment comment1 = new Comment();
+		/*Comment comment1 = new Comment();
 		comment1.setComment("Este es el primer comentario");
 		comment1.setCommentDate(LocalDate.now());
 		comment1.setEvent(concierto1);
@@ -80,7 +80,7 @@ public class ProyectoFinalApplication implements CommandLineRunner {
 		comment2.setCommentDate(LocalDate.now());
 		comment2.setEvent(taller1);
 		comment2.setParticipante(participante2);
-		commentRepository.save(comment2);
+		commentRepository.save(comment2);*/
 
     }
 }

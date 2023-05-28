@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 
@@ -29,6 +31,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn (name = "participante_id")
     @JsonBackReference (value = "participante-comment")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Participante participante;
 
 

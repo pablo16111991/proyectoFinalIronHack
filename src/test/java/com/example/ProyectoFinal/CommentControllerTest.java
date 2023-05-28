@@ -55,7 +55,8 @@ public class CommentControllerTest {
     @Autowired
     private ConferenciaRepository conferenciaRepository;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    private ObjectMapper objectMapper; // Esto usará el ObjectMapper preconfigurado de Spring Boot
 
     @BeforeEach
     void setUp() {
@@ -120,24 +121,28 @@ public class CommentControllerTest {
    @Test
     public void addCommentTest() throws Exception {
         Concierto concierto1 = conciertoRepository.findConciertoByName("Concierto de Nirvana");
-        Participante participante1 = participanteRepository.findParticipanteByEmail("paco@gmail.com");
-        Comment comment = new Comment();
-        comment.setComment("Comentario de prueba para el test de Springboot");
-        comment.setCommentDate(LocalDate.now());
-        comment.setEvent(concierto1);
-        comment.setParticipante(participante1);
 
+        Participante participante3 = new Participante();
+       participante3.setName("Tomy");
+       participante3.setEmail("tomy@gmail.com");
+       participante3.setPassword("passworddelcarajo");
+       participante3 = participanteRepository.save(participante3);
 
+        CommentRequest request = new CommentRequest(1l,1l,"Ejemplo de la vida");
 
-        String body = objectMapper.writeValueAsString(comment);
+        String body = objectMapper.writeValueAsString(request);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/añadir-comment")
                         .content(body)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated()).andReturn();
-        assertEquals(4, commentRepository.findAll().size());
+        assertEquals(3, commentRepository.findAll().size());
 
     }
 
+    @Test
+    public void shouldShowCommentByEventId() throws Exception {
+        
+    }
 
 
 
