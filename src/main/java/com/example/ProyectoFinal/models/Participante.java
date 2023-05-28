@@ -2,6 +2,7 @@ package com.example.ProyectoFinal.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class Participante extends Usuario {
 
-    @OneToMany(mappedBy = "participante")
+    @OneToMany(mappedBy = "participante", fetch = FetchType.EAGER)
     @JsonManagedReference (value = "participante-comment")
     private List<Comment> comments = new ArrayList<>();
     // otros campos, constructores, getters y setters

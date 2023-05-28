@@ -39,7 +39,7 @@ public abstract class Event {
     @JsonBackReference (value = "eventosCreados")
     private Organizador organizador;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
     @JsonBackReference (value = "event-comment")
     private List<Comment> comments = new ArrayList<>();
 

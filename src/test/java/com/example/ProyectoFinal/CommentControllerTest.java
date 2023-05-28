@@ -107,6 +107,13 @@ public class CommentControllerTest {
         comment2.setParticipante(participante2);
         commentRepository.save(comment2);
 
+        Comment comment3 = new Comment();
+        comment3.setComment("Este es el tercer comentario");
+        comment3.setCommentDate(LocalDate.now());
+        comment3.setEvent(concierto1);
+        comment3.setParticipante(participante2);
+        commentRepository.save(comment3);
+
     }
 
     @AfterEach
@@ -135,15 +142,53 @@ public class CommentControllerTest {
                         .content(body)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated()).andReturn();
-        assertEquals(3, commentRepository.findAll().size());
+        assertEquals(4, commentRepository.findAll().size());
 
     }
+
+   @Test
+    public void shouldShowCommentByEventId() throws Exception {
+
+
+       Comment comment1 = new Comment();
+       comment1.setComment("Este es el primer comentario");
+       comment1.setCommentDate(LocalDate.now());
+       comment1.setEvent(conciertoRepository.findById(1l).get());
+       comment1.setParticipante(participanteRepository.findById(1l).get());
+       commentRepository.save(comment1);
+
+       Comment comment2 = new Comment();
+       comment2.setComment("Este es el segundo comentario");
+       comment2.setCommentDate(LocalDate.now());
+       comment2.setEvent(conciertoRepository.findById(1l).get());
+       comment2.setParticipante(participanteRepository.findById(2l).get());
+       commentRepository.save(comment2);
+
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/comment-by-eventId/1"))
+                .andExpect(status().isOk()).andReturn();
+        assertEquals(2, conciertoRepository.findById(1l).get().getComments().size());
+    }
+
 
     @Test
-    public void shouldShowCommentByEventId() throws Exception {
-        
+    public void shouldShowCommentByUserId() throws Exception {
+
+        Conferencia conferencia1 = new Conferencia(List.of("Picasso", "Dalí"));
+        conferencia1.setName("Conferencia de Artes");
+        conferencia1.setEventDate(LocalDate.of(2023, 6, 18));  // Conferencia programada para el 18 de junio de 2023
+        conferenciaRepository.save(conferencia1);
+
+        Comment comment1 = new Comment();
+        comment1.setComment("Este es el primer comentario");
+        comment1.setCommentDate(LocalDate.now());
+        comment1.setEvent(conferencia1);
+        comment1.setParticipante(participanteRepository.findById(1l).get());
+        commentRepository.save(comment1);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/comment-by-userId/1"))
+                .andExpect(status().isOk()).andReturn();
+        assertEquals(1, participanteRepository.findById(1l).get().getComments().size());
     }
-
-
 
 }
