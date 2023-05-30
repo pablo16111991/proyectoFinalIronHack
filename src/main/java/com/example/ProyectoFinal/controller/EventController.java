@@ -1,7 +1,9 @@
 package com.example.ProyectoFinal.controller;
 
 import com.example.ProyectoFinal.dto.ConciertoDTO;
+import com.example.ProyectoFinal.dto.ConferenciaDTO;
 import com.example.ProyectoFinal.dto.EventDateNNameDTO;
+import com.example.ProyectoFinal.dto.TallerDTO;
 import com.example.ProyectoFinal.models.Concierto;
 import com.example.ProyectoFinal.models.Conferencia;
 import com.example.ProyectoFinal.models.Event;
@@ -86,6 +88,18 @@ public class EventController {
     @ResponseStatus(HttpStatus.CREATED)
     public Concierto addConcert (@RequestBody ConciertoDTO conciertoDTO){
         return eventoService.addConcierto(conciertoDTO);
+    }
+
+    @PostMapping (value = "/add-taller")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Taller addTaller (@RequestBody TallerDTO tallerDTO){
+        return eventoService.addTaller(tallerDTO);
+    }
+
+    @PostMapping (value = "/add-conferencia")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Conferencia addConferencia (@RequestBody ConferenciaDTO conferenciaDTO){
+        return eventoService.addConferencia(conferenciaDTO);
     }
 
 
