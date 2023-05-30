@@ -1,6 +1,7 @@
 package com.example.ProyectoFinal;
 
 import com.example.ProyectoFinal.dto.ConciertoDTO;
+import com.example.ProyectoFinal.dto.ConferenciaDTO;
 import com.example.ProyectoFinal.dto.EventDateNNameDTO;
 import com.example.ProyectoFinal.dto.TallerDTO;
 import com.example.ProyectoFinal.models.*;
@@ -209,6 +210,15 @@ public class EventoControllerTest {
 
         assertEquals(true,tallerRepository.existsById(taller.getEventId()));
 
+        ConferenciaDTO conferenciaDTO = new ConferenciaDTO("conferencia añadida de prueba",LocalDate.now(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+        String body3 = objectMapper.writeValueAsString(conferenciaDTO);
+        MvcResult result3 = mockMvc.perform(MockMvcRequestBuilders.post("/add-conferencia")
+                        .content(body3)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated()).andReturn();
+        Conferencia conferencia = conferenciaRepository.findConferenciaByName("conferencia añadida de prueba");
+
+        assertEquals(true, conferenciaRepository.existsById(conferencia.getEventId()));
 
         /*
             private String name;
