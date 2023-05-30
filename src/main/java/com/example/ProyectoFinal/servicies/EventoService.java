@@ -62,18 +62,6 @@ public class EventoService {
         }
     }
 
-   /* public Concierto addConcierto(Concierto concierto) {
-        return conciertoRepository.save(concierto);
-    }
-
-    public Taller addTaller(Taller taller) {
-        return tallerRepository.save(taller);
-    }
-
-    public Conferencia addConferencia(Conferencia conferencia) {
-        return conferenciaRepository.save(conferencia);
-    }*/
-
     public void deleteEvent (Long id) {
         if (conferenciaRepository.existsById(id)) {
             conferenciaRepository.deleteById(id);
