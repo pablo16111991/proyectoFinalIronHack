@@ -38,7 +38,7 @@ public class ProyectoFinalApplication implements CommandLineRunner {
 
 
 		Participante participante1 = new Participante(null,null,null);
-		participante1.setName("Paco");
+		participante1.setName("Pepe");
 		participante1.setEmail("paco@gmail.com");
 		participante1.setPassword("contraseñainquebrantable");
 		participanteRepository.save(participante1);
@@ -67,20 +67,6 @@ public class ProyectoFinalApplication implements CommandLineRunner {
 		taller1.setEventDate(LocalDate.of(2023, 6, 17));  // Taller programado para el 18 de junio de 2023
 		tallerRepository.save(taller1);
 
-
-		/*Comment comment1 = new Comment();
-		comment1.setComment("Este es el primer comentario");
-		comment1.setCommentDate(LocalDate.now());
-		comment1.setEvent(concierto1);
-		comment1.setParticipante(participante1);
-		commentRepository.save(comment1);
-
-		Comment comment2 = new Comment();
-		comment2.setComment("Este es el segundo comentario");
-		comment2.setCommentDate(LocalDate.now());
-		comment2.setEvent(taller1);
-		comment2.setParticipante(participante2);
-		commentRepository.save(comment2);*/
 
     }
 }

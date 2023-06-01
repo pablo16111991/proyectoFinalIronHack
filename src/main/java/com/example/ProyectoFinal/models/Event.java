@@ -28,10 +28,10 @@ public abstract class Event {
 
     @NotNull
     private LocalDate eventDate;
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference (value = "eventosAsistidos")
     private List<Participante> participantesAsistentes = new ArrayList<>();
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference (value = "eventosPendientes")
     private List<Participante> participantesPendientes = new ArrayList<>();
     @ManyToOne

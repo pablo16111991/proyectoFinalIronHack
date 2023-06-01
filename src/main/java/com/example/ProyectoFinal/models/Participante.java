@@ -1,10 +1,7 @@
 package com.example.ProyectoFinal.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,11 +22,11 @@ public class Participante extends Usuario {
     // otros campos, constructores, getters y setters
 
 
-    @ManyToMany (mappedBy = "participantesAsistentes")
+    @ManyToMany (mappedBy = "participantesAsistentes", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference (value = "eventosAsistidos")
     private List<Event> eventosAsistidos = new ArrayList<>();
 
-    @ManyToMany (mappedBy = "participantesPendientes")
+    @ManyToMany (mappedBy = "participantesPendientes",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference (value = "eventosPendientes")
     private List<Event> eventosPendientes = new ArrayList<>();
 }

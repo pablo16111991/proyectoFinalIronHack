@@ -220,13 +220,7 @@ public class EventoControllerTest {
 
         assertEquals(true, conferenciaRepository.existsById(conferencia.getEventId()));
 
-        /*
-            private String name;
-    private LocalDate eventDate;
-    private List<Participante> participantesAsistentes;
-    private List<Participante> participantesPendientes;
-    private List<String> ponentes;
-         */
+
 
     }
 
